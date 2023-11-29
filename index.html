@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>
+		Addiction
+	</title>
+	<style type="text/css">
+		@import url('https://webfontworld.github.io/leferi/LeferiBase.css');
+		body{
+			margin: 0;
+			overflow: hidden;
+			background-color: black;
+		}
+		h1, p, h3{
+			margin: 0
+		}
+		.hidden{
+			display: none;
+		}
+
+		/*alert*/
+		.alert{
+			width:100vw;
+			height: 100vh;
+			background: black;
+		}
+		.alert h1{
+			padding-top: 30vh;
+			text-align: center;
+			font-family: 'LeferiBase' !important;
+			font-weight: 600;
+			color: white;
+			}
+		.alert p{
+			padding-top: 5vh;
+			text-align: center;
+			line-height: 1.5;
+			font-family: 'LeferiBase' !important;
+			color: white;
+		}
+		.alert h3{
+			padding-top: 3vh;
+			text-align: center;
+			line-height: 1.7;
+			font-family: 'LeferiBase' !important;
+			font-weight: 500;
+			color: white;
+		}
+		.alert button{
+			display: block;
+			margin: 4vh auto;
+			border: 1px solid white;
+			outline: none;
+			background: black;
+			color: white;
+			font-family: 'LeferiBase' !important;
+			font-size: 20px;
+			transition: background 0.3s, color 0.3s;
+			padding: 0.5vh 2vh;
+			position: relative;
+			z-index: 3;
+		}
+		.alert button:hover{
+			background: white;
+			color: black;
+		}
+		.caution{
+			position: absolute;
+			width:30vw;
+			top: 40%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 2;
+		}
+
+		/* Nav */
+		#container {
+		  padding: 0;
+		  margin: 0;
+		  background-color: black;
+		}
+		#main {
+		  padding: 4% 1.5em;
+		  max-width: 55em;
+		  margin: 0 auto;
+		}
+		#header {
+		  padding: 1.5em;
+		  margin: 0 0 1em 0;
+		  background-color: black;
+		}
+		#footer {
+		  padding: 1.5em;
+		  margin: 2em 0 0 0;
+		  background-color: black;
+
+		}
+		.primary-nav {
+			position: fixed;
+			z-index: 999;
+			background-color: black;
+		}
+		.menu {
+			position: relative;
+		}
+		.menu ul {
+		  margin: 0;
+		  padding: 0;
+		  list-style: none;
+			
+		}
+		.open-panel {
+		  border: none;
+		  background-color:#fff;
+		  padding: 0;
+		}
+		.hamburger {
+			background: black;
+			position: relative;
+			display: block;
+			text-align: center;
+			padding: 13px 0;
+			width: 50px;
+		 	height: 73px;
+			left: 0;
+			top: 0;
+			z-index: 1000;
+		  cursor: pointer;
+		}
+		.hamburger:before {
+			content:"\2630";
+			display: block;
+		 	color: white;
+		 	line-height: 32px;
+			font-size: 16px;
+		}
+		.openNav .hamburger:before {
+			content:"\2715"; /* close icon */
+			display: block;
+		 	color: white;
+		 	line-height: 32px;
+			font-size: 16px;
+		}
+		.hamburger:hover:before {
+		  color: #777;
+		}
+		.primary-nav .menu li {
+			position: relative;
+		}
+		.menu .icon {
+			position: absolute;
+			top: 12px;
+			right: 10px;
+			pointer-events: none;
+			width: 24px;
+			height: 24px;
+		}
+		.menu,
+		.menu a,
+		.menu a:visited {
+			color: #aaa;
+		 	text-decoration: none!important;
+			position: relative;
+		}
+		.menu a {
+		  display: block;
+		  white-space: nowrap;
+		  padding: 1em;
+		  font-size: 14px;
+		}
+		.menu a:hover {
+			color: #fff;
+		}
+		.menu {
+			margin-bottom: 3em;
+		}
+		.menu-dropdown li .icon {
+			color: #777;
+		}
+		.menu-dropdown li:hover .icon {
+			color: #fff;
+		}
+		.menu label {
+		  margin-bottom: 0;
+		  display: block;
+		}
+		.menu label:hover {
+		  cursor: pointer;
+		}
+		.menu input[type="checkbox"] {
+		  display: none;
+		}
+		input#menu[type="checkbox"] {
+		  display: none;
+		}
+		.sub-menu-dropdown {
+			display: none;
+		}
+		.new-wrapper {
+			position: absolute;
+			left: 50px;
+			width: calc(100% - 50px);
+			transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
+		}
+		#menu:checked + ul.menu-dropdown {
+			left: 0;
+		    -webkit-animation: all .45s cubic-bezier(0.77, 0, 0.175, 1);
+		            animation: all .45s cubic-bezier(0.77, 0, 0.175, 1);
+		}
+		.sub-menu-checkbox:checked + ul.sub-menu-dropdown {
+		    display: block!important;
+		    -webkit-animation: grow .45s cubic-bezier(0.77, 0, 0.175, 1);
+		            animation: grow .45s cubic-bezier(0.77, 0, 0.175, 1);
+		}
+		.openNav .new-wrapper {
+		  position: absolute;
+		  transform: translate3d(200px, 0, 0);
+		  width: calc(100% - 250px);
+		  transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
+		}
+		.downarrow {
+		  background: transparent;
+			position: absolute;
+			right: 50px;
+			top: 12px;
+		  color: #777;
+		  width: 24px;
+		  height: 24px;
+		  text-align: center;
+		  display: block;
+		}
+		.downarrow:hover {
+		  color: #fff;
+		}
+		.menu {
+			position: absolute;
+			display: block;
+			left: -200px;
+		 	top: 0;
+			width: 250px;
+		  	transition: all 0.45s cubic-bezier(0.77, 0, 0.175, 1);
+		  	background-color: #000;
+			z-index: 999;
+		}
+		.menu-dropdown {
+		  top: 0;
+		  overflow-y: auto;
+		}
+		.overflow-container {
+		  position: relative;
+		  height: calc(100vh - 73px)!important;
+		  border-top: 73px solid black;
+		  overflow-y: auto;
+		  z-index: -1;
+		  display:block;
+		  background-color: black;
+		}
+		.menu a.logotype {
+		  position: absolute!important;
+		  top: 11px;
+		  left: 55px;
+		  display: block;
+		  font-family:'LeferiBase' !important;
+		  text-transform: uppercase;
+		  font-weight: 700;
+		  color: white;
+		  font-size: 21px;
+		  padding: 10px;
+		  background-color: black;
+		}
+		.menu a.logotype span {
+		  font-weight: 400;
+		}
+		.menu a.logotype:hover {
+		  color: #777;
+		}
+		.sub-menu-dropdown {
+			background-color: #333;
+		}
+		.menu:hover {
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		.openNav .menu:hover {
+			position: absolute;
+			left: -200px;
+			top 73px;
+		}
+		.openNav .menu {
+		  top 73px;
+				transform: translate3d(200px, 0, 0);
+		    transition: transform .45s cubic-bezier(0.77, 0, 0.175, 1);
+		}
+		.menu p{
+			color: #aaa;
+			position: absolute !important;
+			top: 90vh;
+			left: 1em;
+			font-family:'LeferiBase' !important;
+			font-size: 12px;
+			line-height: 1.7;
+		}
+
+		/* 환각 */
+		.canvas1 {
+            display: none;
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200vw;
+            height: 200vh;
+            background-color: black;
+            animation: rotate1 10s linear infinite;
+            mix-blend-mode: lighten;
+        }
+        .canvas2 {
+            display: none;
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200vw;
+            height: 200vh;
+            background-color: black;
+            animation: rotate2 7s reverse infinite;
+            mix-blend-mode: screen;
+        }
+        .canvas3 {
+            display: none;
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200vw;
+            height: 200vh;
+            background-color: black;
+            animation: rotate3 5s linear infinite;
+            mix-blend-mode: lighten;
+        }
+        @keyframes rotate1 {
+            0% {
+                transform: rotate(0deg) scale(1.25);
+                filter: hue-rotate(-180deg);
+                backdrop-filter: hue-rotate(0deg);
+            }
+            50% {
+                transform: rotate(180deg) scale(1);
+            }
+            100% {
+                transform: rotate(360deg) scale(1.25);
+                filter: hue-rotate(180deg);
+                backdrop-filter: hue-rotate(360deg);
+            }
+        }
+        @keyframes rotate2 {
+            0% {
+                transform: rotate(0deg) scale(2);
+                filter: hue-rotate(-180deg);
+                backdrop-filter: hue-rotate(0deg);
+            }
+            50% {
+                transform: rotate(180deg) scale(1);
+            }
+            100% {
+                transform: rotate(360deg) scale(2);
+                filter: hue-rotate(180deg);
+                backdrop-filter: hue-rotate(360deg);
+            }
+        }
+        @keyframes rotate3 {
+            0% {
+                transform: rotate(0deg) scale(0.75);
+                filter: hue-rotate(-180deg);
+                backdrop-filter: hue-rotate(0deg);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.5);
+            }
+            100% {
+                transform: rotate(360deg) scale(0.75);
+                filter: hue-rotate(180deg);
+                backdrop-filter: hue-rotate(360deg);
+            }
+        }
+        #scaleSlider {
+            position: absolute;
+            width: 50vw;
+            top: 95vh;
+            left: 51%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+           	opacity: 0.7;
+        }
+        input[type=range] {
+          -webkit-appearance: none;
+          margin: 10px 0;
+          width: 100%;
+        }
+        input[type=range]:focus {
+          outline: none;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+          width: 100%;
+          height: 30px;
+          cursor: pointer;
+          animate: 0.2s;
+          box-shadow: 0px 0px 0px #000000;
+          background: #000000;
+          border-radius: 0px;
+          border: 0px solid #000000;
+        }
+        input[type=range]::-webkit-slider-thumb {
+          box-shadow: 0px 0px 0px #000000;
+          border: 0px solid #E3E3E3;
+          height: 30px;
+          width: 14px;
+          border-radius: 0px;
+          background: #FFFFFF;
+          cursor: pointer;
+          -webkit-appearance: none;
+          margin-top: 0px;
+        }
+        input[type=range]:focus::-webkit-slider-runnable-track {
+          background: #000000;
+        }
+        input[type=range]::-moz-range-track {
+          width: 100%;
+          height: 30px;
+          cursor: pointer;
+          animate: 0.2s;
+          box-shadow: 0px 0px 0px #000000;
+          background: #000000;
+          border-radius: 0px;
+          border: 0px solid #000000;
+        }
+        input[type=range]::-moz-range-thumb {
+          box-shadow: 0px 0px 0px #000000;
+          border: 0px solid #E3E3E3;
+          height: 30px;
+          width: 14px;
+          border-radius: 0px;
+          background: #FFFFFF;
+          cursor: pointer;
+        }
+        input[type=range]::-ms-track {
+          width: 100%;
+          height: 30px;
+          cursor: pointer;
+          animate: 0.2s;
+          background: transparent;
+          border-color: transparent;
+          color: transparent;
+        }
+        input[type=range]::-ms-fill-lower {
+          background: #000000;
+          border: 0px solid #000000;
+          border-radius: 0px;
+          box-shadow: 0px 0px 0px #000000;
+        }
+        input[type=range]::-ms-fill-upper {
+          background: #000000;
+          border: 0px solid #000000;
+          border-radius: 0px;
+          box-shadow: 0px 0px 0px #000000;
+        }
+        input[type=range]::-ms-thumb {
+          margin-top: 1px;
+          box-shadow: 0px 0px 0px #000000;
+          border: 0px solid #E3E3E3;
+          height: 30px;
+          width: 14px;
+          border-radius: 0px;
+          background: #FFFFFF;
+          cursor: pointer;
+        }
+        input[type=range]:focus::-ms-fill-lower {
+          background: #000000;
+        }
+        input[type=range]:focus::-ms-fill-upper {
+          background: #000000;
+        }
+
+        /*불안*/
+        .eyes {
+        	padding-top: 45vh;
+			width: 100%;
+			height: 5em;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: row;
+			column-gap: 2vw;
+		}
+		.eye {
+		  width: 7em;
+		  height: 5em;
+		  border-radius: 100%;
+		  background-color: #fff;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  transition: background-color- 0.2s ease;
+		}
+		.pupil {
+		  width: 3em;
+		  height: 3em;
+		  border-radius: 50%;
+		  background-color: #000;
+		}
+		.border-circle {
+		  position: absolute;
+		  transform: translate(-50%, -50%);
+		  width: 120vh;
+		  height: 120vh;
+		  border-radius: 100%;
+		  border: 3px solid white;
+		  animation: ripple 3.0s infinite;
+		  box-sizing: border-box;
+		  transition: border-color 0.2s ease;
+		}
+		@keyframes ripple {
+		  0% {
+		    opacity: 1;
+		    transform: scale(0);
+		  }
+		  75%{
+		  	opacity: 0.6;
+		  }
+		  100% {
+		    opacity: 0;
+		    transform: scale(1);
+		  }
+		}
+		.anxiety-cursor {
+      		cursor: url('medicine.png'), auto;
+   		}
+
+   		/*벌레*/
+   		#bugs{
+   			width: 100vw;
+   			height: 100vh;
+   			display: none;
+   			z-index: 1;
+   		}
+   		#scaleSlider2 {
+            position: absolute;
+            width: 50vw;
+            top: 95vh;
+            left: 51%;
+            transform: translate(-50%, -50%);
+            z-index: 99;
+           	opacity: 0.7;
+        }
+
+        /*무너짐*/
+
+        .ex{text-align: center;}
+	</style>
+</head>
+<body>
+	<!--nav-->
+	<div class="primary-nav">
+		<button href="#" class="hamburger open-panel nav-toggle">
+		</button>
+		<nav role="navigation" class="menu">
+			<a href="#" class="logotype">Addiction</a>
+			<div class="overflow-container">
+				<ul class="menu-dropdown">
+					<li id="content1"><a href="#">Hallucination</a><span class="icon"><i class="fa fa-dashboard"></i></span></li>
+					<li id="content2" class="menu-hasdropdown">
+						<a href="#">Anxiety</a><span class="icon"><i class="fa fa-gear"></i></span>
+						<label title="toggle menu" for="settings">
+		       <span class="downarrow"><i class="fa fa-caret-down"></i></span>
+		    </label>
+				<li id="content3"><a href="#">Neural Interference</a><span class="icon"><i class="fa fa-heart"></i></span></li>
+				<li id="content4"><a href="#">Fall Apart</a><span class="icon"><i class="fa fa-envelope"></i></span></li>
+				</ul>
+		</div>
+			<p>
+			Copyright &copy;2023. 김병준<br>
+			2023-2 Web-interaction
+			</p>
+		</nav>
+	</div>
+
+	<!-- 경고문 -->
+	<div class="alert">
+			<h1>경고: 시작 전 자세히 읽어주세요</h1>
+			<p>번쩍이는 빛이나 무늬와 같은 시각적 이미지에 노출될 시 발작을 일으킬 수 있습니다.<br>광과민성 발작은 환각, 눈이나 얼굴의 경련, 팔이나 다리의 경련이나 떨림, 방향 감각 상실,<br> 정신 착란, 일시적인 의식 상실등과 같은 여러가지 증상으로 나타날수 있습니다.<br><br>이런 증상 중 한가지라도 나타나게 되면 즉시 이용을 중지하고 휴식을 취하세요.</p>
+			<h3>- 조명이 밝은 곳에서 이용을 하십시오<br>
+			- 피곤할 때는 이용을 하지마십시오</h3>
+			<button id="startbutton">시작하기</button>
+			<img src="caution.png" class="caution">
+	</div>
+
+	<!--환각-->
+	<input type="range" id="scaleSlider" value="0" class="cont1 hidden">
+    <canvas id="graphCanvas1" class="cont1 canvas1"></canvas>
+    <canvas id="graphCanvas2" class="cont1 canvas2"></canvas>
+	<canvas id="graphCanvas3" class="cont1 canvas3"></canvas>
+
+	<!--불안-->
+	<div id='eyes' class="eyes cont2">
+		<div id="eye" class="eye cont2">
+			<div class="pupil cont2"></div>
+		</div>
+		<div id="eye" class="eye cont2">
+			<div class="pupil cont2"></div>
+		</div>
+		<div class='border-circle cont2 hidden'></div>
+	</div>
+	
+	<input type="range" id="scaleSlider2" value="200" min="200" max="750" class="cont3 hidden">
+	<div id="bugs" class="cont3">
+	</div>
+
+	<!--무너짐-->
+	<div class="cont4 hidden" id="canvasContainer"></div>
+
+	<script src="https://pixijs.download/v5.3.10/pixi.min.js">
+		import * as PIXI from 'pixi.js';
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js">
+	</script>
+	<script>	
+		//무너짐//
+		var mode = 0;
+		var imgSrcFileName = "https://as1.ftcdn.net/v2/jpg/01/90/85/62/1000_F_190856229_SxGFrSvkiEbAvIuHkd8W2uuiheb6Twsl.jpg";
+		var imgSrc;  
+		var imgSrcPixels = [];
+		var imgPixels = [];
+		var blackValue = 0;
+		var brightnessValue = 0;
+		var whiteValue = 0;
+		var row = 0;
+		var column = 0;
+		var paramsDiv;
+		function preload() {
+	    	imgSrc = loadImage(imgSrcFileName);
+	    }
+		let cnv
+		function setup() {
+			var canvasContainer = createDiv('');
+    		canvasContainer.class('cont4');
+    		canvasContainer.class('hidden'); // initially hide the div
+    		canvasContainer.id('canvasContainer');
+	 		cnv = createCanvas(imgSrc.width, imgSrc.height);
+	 		cnv.parent('canvasContainer');
+	  		cnv.elt.id = "collapseImage";
+	  		cnv.elt.className = "cont4";
+	  		cnv.elt.className = "hidden";
+	  		pixelDensity(1);
+	  		cursor(HAND);
+	  		cnv.style("position", "absolute");
+	  		cnv.style("transform", "translate(-50%, -50%)");
+	  		cnv.style("top", "50%");
+	  		cnv.style("left", "50%");
+	  		cnv.style("z-index", "0");
+		    imgSrc.loadPixels();
+		    for (var i = 0; i < 4 * (imgSrc.width * imgSrc.height); i += 4) {
+		        imgSrcPixels[int(i / 4)] = (255 << 24) | (imgSrc.pixels[i] << 16) | (imgSrc.pixels[i + 1] << 8) | (imgSrc.pixels[i + 2]);
+		    }
+	    imgSrc.updatePixels();
+	    loadPixels();
+	    updateParams();
+	    paramsDiv = createDiv('...');
+	    paramsDiv.style("position", "absolute");
+	    paramsDiv.style("width", "100%");
+	    paramsDiv.style("bottom", 0);
+	    paramsDiv.style("font-family", "Verdana");
+	    paramsDiv.style("font-size", 12);
+	    paramsDiv.style("color", "#fff");
+	    paramsDiv.style("text-shadow", "1px 1px 0 #000");
+	    paramsDiv.style("text-align", "center");
+	    paramsDiv.parent('canvasContainer');
+	    // paramsDiv.style("display", "none");
+	}
+		function draw() {
+		  background(255);
+		  imgPixels = imgSrcPixels.slice();
+		  row = 0;
+		  column = 0;
+		  while (row < height - 1) {
+		    sortRow();
+		    row++;
+		  }
+		  while (column < width - 1) {
+		    sortColumn();
+		    column++;
+		  }
+		  var imageBytes = 4 * (imgSrc.width * imgSrc.height);
+		  var i = 0;
+		  while (i < imageBytes) {
+		    var col = imgPixels[int(i / 4)];
+		    pixels[i++] = col >> 16 & 255;
+		    pixels[i++] = col >> 8 & 255;
+		    pixels[i++] = col & 255;
+		    pixels[i++] = 255;
+		  }
+		  updatePixels();
+		  updateParams();
+		}
+
+		function mouseClicked() {
+		  if (mode < 2) {
+		    ++mode;
+		  } else {
+		    mode = 0;
+		  }
+		  updateParams();
+		}
+		function mouseMoved() {
+		  updateParams();
+		}
+
+function updateParams() {
+  if (mode === 0) {
+    blackValue = int(map(mouseX, 0, width - 1, -16777216, 255));
+  } else if (mode == 1) {
+    brightnessValue = int(map(mouseX, 0, width - 1, 0, 255));
+  } else if (mode == 2) {
+    whiteValue = int(map(mouseX, 0, width - 1, -16777216, 255));
+  }
+
+  var params = "";
+  if (mode === 0) {
+    params = "mode: 0 - blackValue: " + blackValue;
+  } else if (mode == 1) {
+    params = "mode: 1 - brightnessValue: " + brightnessValue;
+  } else if (mode == 2) {
+    params = "mode: 2 - whiteValue: " + whiteValue;
+  }
+
+		  // paramsDiv 업데이트
+		  if (paramsDiv) {
+		    paramsDiv.html(params);
+		  }
+		}
+				function sortRow() 
+				{
+					// current row
+					var y = row;
+					var iRow = y * imgSrc.width;
+					// where to start sorting
+					var x = 0;
+					// where to stop sorting
+					var xend = 0;
+					while (xend < width - 1) {
+						switch (mode) {
+							case 0:
+								x = getFirstNotBlackX(x, y);
+								xend = getNextBlackX(x, y);
+								break;
+							case 1:
+								x = getFirstBrightX(x, y);
+								xend = getNextDarkX(x, y);
+								break;
+							case 2:
+								x = getFirstNotWhiteX(x, y);
+								xend = getNextWhiteX(x, y);
+								break;
+							default:
+								break;
+						}
+						if (x < 0) break;
+						var sortLength = xend - x;
+						var unsorted = [];
+						var sorted = [];
+						for (var i = 0; i < sortLength; i++) {
+							unsorted[i] = imgPixels[x + i + iRow];
+						}
+						sorted = sort(unsorted);
+						for (var i = 0; i < sortLength; i++) {
+							imgPixels[x + i + iRow] = sorted[i];
+						}
+						x = xend + 1;
+					}
+				}
+				function sortColumn() 
+				{
+					// current column
+					var x = column;
+					// where to start sorting
+					var y = 0;
+					// where to stop sorting
+					var yend = 0;
+					while (yend < height - 1) {
+						switch (mode) {
+							case 0:
+								y = getFirstNotBlackY(x, y);
+								yend = getNextBlackY(x, y);
+								break;
+							case 1:
+								y = getFirstBrightY(x, y);
+								yend = getNextDarkY(x, y);
+								break;
+							case 2:
+								y = getFirstNotWhiteY(x, y);
+								yend = getNextWhiteY(x, y);
+								break;
+							default:
+								break;
+						}
+						if (y < 0) break;
+						var sortLength = yend - y;
+						var unsorted = [];
+						var sorted = [];
+						for (var i = 0; i < sortLength; i++) {
+							unsorted[i] = imgPixels[x + (y + i) * imgSrc.width];
+						}
+						sorted = sort(unsorted);
+						for (var i = 0; i < sortLength; i++) {
+							imgPixels[x + (y + i) * imgSrc.width] = sorted[i];
+						}
+						y = yend + 1;
+					}
+				}
+				// black x
+				function getFirstNotBlackX( x, y )
+				{
+					var iRow = y * imgSrc.width;
+					while (imgPixels[x + iRow] < blackValue) {
+						x++;
+						if (x >= width)
+							return -1;
+					}
+					return x;
+				}
+				function getNextBlackX( x, y )
+				{
+					x++;
+					var iRow = y * imgSrc.width;
+					while (imgPixels[x + iRow] > blackValue) {
+						x++;
+						if (x >= width)
+							return width - 1;
+					}
+					return x - 1;
+				}
+				// brightness x
+				function getFirstBrightX( x, y )
+				{
+					var iRow = y * imgSrc.width;
+					while (brightness2(imgPixels[x + iRow]) < brightnessValue) {
+						x++;
+						if (x >= width)
+							return -1;
+					}
+					return x;
+				}
+				function getNextDarkX( _x, _y )
+				{
+					var x = _x + 1;
+					var y = _y;
+
+					var iRow = y * imgSrc.width;
+					while (brightness2(imgPixels[x + iRow]) > brightnessValue) {
+						x++;
+						if (x >= width) return width - 1;
+					}
+					return x - 1;
+				}
+				// white x
+				function getFirstNotWhiteX( x, y )
+				{
+					var iRow = y * imgSrc.width;
+					while (imgPixels[x + iRow] > whiteValue) {
+						x++;
+						if (x >= width)
+							return -1;
+					}
+					return x;
+				}
+				function getNextWhiteX( x, y )
+				{
+					x++;
+					var iRow = y * imgSrc.width;
+					while (imgPixels[x + iRow] < whiteValue) {
+						x++;
+						if (x >= width)
+							return width - 1;
+					}
+					return x - 1;
+				}
+				// black y
+				function getFirstNotBlackY( x, y )
+				{
+					if (y < height) {
+						while (imgPixels[x + y * imgSrc.width] < blackValue) {
+							y++;
+							if (y >= height)
+								return -1;
+						}
+					}
+					return y;
+				}
+				function getNextBlackY( x, y )
+				{
+					y++;
+					if (y < height) {
+						while (imgPixels[x + y * imgSrc.width] > blackValue) {
+							y++;
+							if (y >= height)
+								return height - 1;
+						}
+					}
+					return y - 1;
+				}
+				// brightness y
+				function getFirstBrightY( x, y )
+				{
+					if (y < height) {
+						while (brightness2(imgPixels[x + y * imgSrc.width]) < brightnessValue) {
+							y++;
+							if (y >= height)
+								return -1;
+						}
+					}
+					return y;
+				}
+				function getNextDarkY( x, y )
+				{
+					y++;
+					if (y < height) {
+						while (brightness2(imgPixels[x + y * imgSrc.width]) > brightnessValue) {
+							y++;
+							if (y >= height)
+								return height - 1;
+						}
+					}
+					return y - 1;
+				}
+				// white y
+				function getFirstNotWhiteY( x, y )
+				{
+					if (y < height) {
+						while (imgPixels[x + y * imgSrc.width] > whiteValue) {
+							y++;
+							if (y >= height)
+								return -1;
+						}
+					}
+					return y;
+				}
+				function getNextWhiteY( x, y )
+				{
+					y++;
+					if (y < height) {
+						while (imgPixels[x + y * imgSrc.width] < whiteValue) {
+							y++;
+							if (y >= height)
+								return height - 1;
+						}
+					}
+					return y - 1;
+				}
+				function brightness2( col ) {
+					return ( ((col >> 16) & 255) + ((col >> 8) & 255) + (col & 255) ) / 3;
+				}
+	</script>
+	<script type="text/javascript">
+		//nav//
+		document.querySelector('.nav-toggle').addEventListener('click', function() {
+  			document.querySelector('.primary-nav').classList.toggle('openNav');
+		});
+
+		//환각//
+		function drawGraph(canvas, context, func, scale) {
+            const equationDisplay = document.getElementById('equationDisplay');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.beginPath();
+            if (func === 1) {
+            	context.strokeStyle = 'red';
+           		context.lineWidth = 1;
+			    for (let t = 0.01; t <= 2 * Math.PI; t += 0.01) {           
+			        const r = scale * (Math.tan(35 * t) + 1 / Math.cos(35 * t));
+			        const x = canvas.width / 2 + r * Math.cos(t);
+			        const y = canvas.height / 2 - r * Math.sin(t);
+			        context.lineTo(x, y);
+			    }
+			} else if (func === 2) {
+			    for (let t = 0.01; t <= 2 * Math.PI; t += 0.01) {
+			        context.strokeStyle = 'green';
+           			context.lineWidth = 1;          
+			        const r = scale * (Math.tan(35 * t) + 1 / Math.cos(35 * t));
+			        const x = canvas.width / 2 + r * Math.cos(t);
+			        const y = canvas.height / 2 - r * Math.sin(t);
+			        context.lineTo(x, y);
+			    }	
+			} else if (func === 3) {
+			    for (let t = 0.01; t <= 2 * Math.PI; t += 0.01) {  
+			        context.strokeStyle = 'blue';
+           			context.lineWidth = 1;         
+			        const r = scale * (Math.tan(35 * t) + 1 / Math.cos(35 * t));
+			        const x = canvas.width / 2 + r * Math.cos(t);
+			        const y = canvas.height / 2 - r * Math.sin(t);
+			        context.lineTo(x, y);
+			    }
+			}
+			context.stroke();
+        }
+		const canvas1 = document.getElementById('graphCanvas1');
+        const context1 = canvas1.getContext('2d');
+        const canvas2 = document.getElementById('graphCanvas2');
+        const context2 = canvas2.getContext('2d');
+        const canvas3 = document.getElementById('graphCanvas3');
+        const context3 = canvas3.getContext('2d');
+        let selectedFunction = 1;
+        let minRange = 0;
+        let maxRange = 1000;
+        document.getElementById('startbutton').addEventListener('click', function () {
+        	document.querySelector('.alert').classList.add('hidden');
+        	document.querySelector('.cont1').classList.remove('hidden');
+        	document.querySelector('.cont2').classList.add('hidden');
+        	document.querySelector('.cont3').classList.add('hidden');
+        	document.querySelector('.cont4').classList.add('hidden');
+        	eyes.style.display = 'none';
+    		eye.style.display = 'none';
+            minRange = 100;
+            maxRange = 1100;
+            const scaleSlider = document.getElementById('scaleSlider');
+            scaleSlider.min = minRange;
+            scaleSlider.max = maxRange;
+            scaleSlider.value = minRange;
+            scaleSlider.step = 1;
+            drawGraph(canvas1, context1, 1, minRange);
+            canvas1.style.display = 'block';
+            drawGraph(canvas2, context3, 2, minRange);
+            canvas2.style.display = 'block';
+           	drawGraph(canvas3, context3, 3, minRange);
+            canvas3.style.display = 'block';
+        });
+       	const scaleSlider = document.getElementById('scaleSlider');
+       	scaleSlider.addEventListener('input', function () {
+            const scale = parseFloat(scaleSlider.value);
+            drawGraph(canvas1, context1, 1, scale);
+            drawGraph(canvas2, context2, 2, scale);
+            drawGraph(canvas3, context3, 3, scale);
+        });
+        scaleSlider.addEventListener('input', function () {
+		    const animationSpeed = parseFloat(scaleSlider.value);
+		    const rotate1Animation = document.styleSheets[0].cssRules[3];
+		    rotate1Animation.style.animationDuration = `${3 / animationSpeed * 250}s`;
+		    const rotate2Animation = document.styleSheets[0].cssRules[7];
+		    rotate2Animation.style.animationDuration = `${7 / animationSpeed * 250}s`;
+		    const rotate3Animation = document.styleSheets[0].cssRules[11];
+		    rotate3Animation.style.animationDuration = `${11 / animationSpeed * 250}s`;
+		    console.log(rotate3Animation.style.animationDuration)
+		});
+
+		//불안//
+		const eyes = document.getElementById('eyes');
+		const eye = document.getElementById('eye');
+		const pupils = document.querySelectorAll(".eye .pupil");
+		window.addEventListener("mousemove", (e) => {
+		  pupils.forEach((pupil) => {
+		    // get x and y postion of cursor
+		    var rect = pupil.getBoundingClientRect();
+		    var x = (e.pageX - rect.left) / 30 + "px";
+		    var y = (e.pageY - rect.top) / 30 + "px";
+		    pupil.style.transform = "translate3d(" + x + "," + y + ", 0px)";
+		  });
+		});
+		let lastUpdateTime = Date.now();
+		document.addEventListener('mousemove', function (e) {
+			if (Date.now() - lastUpdateTime > 1){
+				const distanceFromCenter = Math.abs(window.innerWidth / 2 - e.clientX);
+		  		const animationDuration = Math.max(2 - distanceFromCenter / 600, 0.2);
+		 		document.querySelector('.border-circle').style.animationDuration = animationDuration + 's';
+			}
+		  	lastUpdateTime = Date.now();	
+		});
+		document.addEventListener('mousemove', function (e) {
+		    const eyes = document.querySelectorAll('.eye');
+		    const borderCircle = document.querySelector('.border-circle');
+		    const distanceFromCenter = Math.abs(window.innerWidth / 2 - e.clientX);
+		    const redValue = Math.min(distanceFromCenter / 3, 255); //
+		    const redColor = `rgba(255, ${255-redValue}, ${255-redValue}, 1)`;
+		    eyes.forEach(eye => {
+		      eye.style.backgroundColor = redColor;
+		    });
+		    borderCircle.style.borderColor = redColor;
+		  });
+
+		//간지럼//
+		const app = new PIXI.Application({ resizeTo: window, autoDensity: true });
+		document.getElementById('bugs').appendChild(app.view);
+		const sprites = new PIXI.ParticleContainer(2000, {
+		    scale: true,
+		    position: true,
+		    rotation: true,
+		    uvs: true,
+		    alpha: true,
+		});
+		app.stage.addChild(sprites);
+		const maggots = [];
+		const totalSprites = app.renderer instanceof PIXI.Renderer ? 2000 : 100;
+		for (let i = 0; i < totalSprites; i++) {
+		    const dude = PIXI.Sprite.from('https://pixijs.com/assets/maggot_tiny.png');
+		    dude.anchor.set(0.5);
+		    dude.scale.set(0.8 + Math.random() * 0.3);
+		    dude.x = Math.random() * app.screen.width;
+		    dude.y = Math.random() * app.screen.height;
+		    dude.direction = Math.random() * Math.PI * 2;
+		    dude.turningSpeed = Math.random() - 0.8;
+		    dude.speed = (2 + Math.random() * 2) * 0.8;
+		    dude.offset = Math.random() * 100;
+		    maggots.push(dude);
+		    sprites.addChild(dude);
+		}
+		const dudeBoundsPadding = 100;
+		const dudeBounds = new PIXI.Rectangle(
+		    -dudeBoundsPadding,
+		    -dudeBoundsPadding,
+		    app.screen.width + dudeBoundsPadding * 2,
+		    app.screen.height + dudeBoundsPadding * 2,
+		);
+		let tick = 0;
+		let mouseX = 0;
+		let mouseY = 0;
+		const scaleRatio = app.renderer.resolution / window.devicePixelRatio;
+		app.renderer.plugins.interaction.on('mousemove', (event) => {
+		    mouseX = event.data.global.x * scaleRatio;
+		    mouseY = event.data.global.y * scaleRatio;
+		});
+		let sliderValue = 200;
+		const scaleSlider2 = document.getElementById('scaleSlider2');
+		scaleSlider2.value = sliderValue;
+		scaleSlider2.addEventListener('input', () => {
+		    sliderValue = parseInt(scaleSlider2.value, 10);
+		});
+		app.ticker.add(() => {
+		    for (let i = 0; i < maggots.length; i++) {
+		        const dude = maggots[i];
+		        const dx = mouseX - dude.x;
+		        const dy = mouseY - dude.y;
+		        const distanceToCursor = Math.sqrt(dx * dx + dy * dy);
+
+		        // Use sliderValue instead of fixed value 200
+		        if (distanceToCursor < sliderValue) {
+		            dude.direction = Math.atan2(dy, dx) + Math.PI;
+		            dude.x += Math.sin(dude.direction) * dude.speed;
+		            dude.y += Math.cos(dude.direction) * dude.speed;
+		        } else {
+		            dude.direction = Math.atan2(dy, dx);
+		            dude.x += Math.sin(dude.direction) * dude.speed;
+		            dude.y += Math.cos(dude.direction) * dude.speed;
+		        }
+
+		        dude.rotation = -dude.direction + Math.PI;
+
+		        if (dude.x < dudeBounds.x) {
+		            dude.x += dudeBounds.width;
+		        } else if (dude.x > dudeBounds.x + dudeBounds.width) {
+		            dude.x -= dudeBounds.width;
+		        }
+
+		        if (dude.y < dudeBounds.y) {
+		            dude.y += dudeBounds.height;
+		        } else if (dude.y > dudeBounds.y + dudeBounds.height) {
+		            dude.y -= dudeBounds.height;
+		        }
+		    }
+
+		    tick += 0.1;
+		});
+
+		//li//
+		document.getElementById('content1').addEventListener('click', function () {
+        	document.querySelector('.cont1').classList.remove('hidden');
+        	document.querySelector('.cont2').classList.add('hidden');
+        	document.querySelector('.cont3').classList.add('hidden');
+        	document.querySelector('.cont4').classList.add('hidden');
+        	document.body.classList.remove('anxiety-cursor');
+        	canvas1.style.display = 'block';
+   			canvas2.style.display = 'block';
+    		canvas3.style.display = 'block';
+    		eyes.style.display = 'none';
+    		eye.style.display = 'none';
+    		bugs.style.display = 'none';
+    		collapseImage.style.display = 'none';
+        });
+        document.getElementById('content2').addEventListener('click', function () {
+        	document.querySelector('.cont1').classList.add('hidden');
+        	document.querySelector('.pupil').classList.remove('hidden');
+        	document.querySelector('.border-circle').classList.remove('hidden');
+        	document.querySelector('.cont3').classList.add('hidden');
+        	document.querySelector('.cont4').classList.add('hidden');
+        	document.body.classList.add('anxiety-cursor');
+        	canvas1.style.display = 'none';
+   			canvas2.style.display = 'none';
+    		canvas3.style.display = 'none';
+    		eyes.style.display = 'flex';
+    		eye.style.display = 'flex';
+    		bugs.style.display = 'none';
+    		collapseImage.style.display = 'none';
+        });
+        document.getElementById('content3').addEventListener('click', function () {
+        	document.querySelector('.cont1').classList.add('hidden');
+        	document.querySelector('.cont2').classList.add('hidden');
+        	document.querySelector('.cont3').classList.remove('hidden');
+        	document.querySelector('.cont4').classList.add('hidden');
+        	document.body.classList.remove('anxiety-cursor');
+        	canvas1.style.display = 'none';
+   			canvas2.style.display = 'none';
+    		canvas3.style.display = 'none';
+    		eyes.style.display = 'none';
+    		eye.style.display = 'none';
+    		bugs.style.display = 'block';
+    		collapseImage.style.display = 'none';
+        });
+        document.getElementById('content4').addEventListener('click', function () {
+        	document.querySelector('.cont1').classList.add('hidden');
+        	document.querySelector('.cont2').classList.add('hidden');
+        	document.querySelector('.cont3').classList.add('hidden');
+        	document.querySelector('.cont4').classList.remove('hidden');
+        	document.body.classList.remove('anxiety-cursor');
+        	canvas1.style.display = 'none';
+   			canvas2.style.display = 'none';
+    		canvas3.style.display = 'none';
+    		eyes.style.display = 'none';
+    		eye.style.display = 'none';
+    		bugs.style.display = 'none';
+            collapseImage.style.display = 'block';
+        });
+	</script>
+</body>
+</html>
